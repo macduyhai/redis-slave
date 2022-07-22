@@ -25,6 +25,7 @@ services:
     #    - redis-master
     volumes:
       - ./redis_data/redis_replication:/data
+      - ./rediscli/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=192.168.0.157
