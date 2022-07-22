@@ -18,7 +18,7 @@ services:
   redis-replica:
     image: 'redis:6'
     container_name: redis_slave
-    command: redis-server --slaveof 192.168.0.157 6379 --port 6380 --slave-announce-ip 192.168.0.157
+    # command: redis-server --slaveof 192.168.0.157 6379 --port 6380 --slave-announce-ip 192.168.0.157
     ports:
       - '6380:6380'
     # depends_on:
@@ -31,6 +31,8 @@ services:
       - REDIS_MASTER_PORT_NUMBER=6379
       - REDIS_MASTER_PASSWORD=1234
       - REDIS_PASSWORD=123
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHAL 
+
     networks:
       - redis-network
 volumes:
