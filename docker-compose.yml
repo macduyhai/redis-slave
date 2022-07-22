@@ -21,8 +21,8 @@ services:
     command: redis-server --slaveof 192.168.0.157 6379 --port 6380 --slave-announce-ip redis-master
     ports:
       - '6380:6380'
-    depends_on:
-       - redis-master
+    # depends_on:
+    #    - redis-master
     volumes:
       - ./redis_data/redis_replication:/data
     environment:
