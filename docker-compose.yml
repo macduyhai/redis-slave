@@ -1,31 +1,17 @@
 version: '2.2'
 
 services:
-  # redis-master:
-  #   image: 'redis:6'
-  #   container_name: redis_master
-  #   restart: always
-  #   command: redis-server --port 6379
-  #   ports:
-  #     - '6379:6379'
-  #   environment:
-  #     - REDIS_REPLICATION_MODE=master
-  #     - REDIS_PASSWORD=1234
-  #   volumes:
-  #     - /redis_data/redis_main:/data
-  #   networks:
-  #     - redis-network
   redis-replica:
     image: 'redis:6'
     container_name: redis_slave
-    command: redis-server /usr/local/etc/redis/redis.conf
+    command: redis-server /etc/redis-config/redis.conf
     ports:
       - '6380:6380'
     # depends_on:
     #    - redis-master
     volumes:
       - ./redis_data/redis_replication:/data
-      - ./rediscli/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./config/redis-slave:/etc/redis-config
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=192.168.0.157
